@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy Game</title>
+    <style>
+        body {
+            background-image: url('../static/new_jeopardy.gif');
+            background-size: cover; /* Adjust the background size as needed */
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ffffff; /* White text color */
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: rgb(255, 165, 0);
+            font-size: 100px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        img {
+            width: 300px; 
+            height: auto; 
+            margin-top: 100px; /* Add margin below the image */
+        }
+
+        button {
+            background-color: #f39c12;
+            color: #ffffff;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #e67e22;
+        }
+
+    </style>
+    
+</head>
+<body>
+    <h1>Jeopardy Sorting Showdown !!!</h1>
+    <p>Choose which sort to load every question ever asked on Jeopardy to start learning!</p>
+    <div class="button-container">
+        <form id="buttonForm" action="/game" method="post">
+            <button type="submit" name="sort_clicked" value="merge">MERGE SORT</button>
+            <button type="submit" name="sort_clicked" value="heap">HEAP SORT</button>
+        </form>
+        
+    </div>
+    <img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/292709338_410986921048296_7127594570232185274_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=g3vpCGngD0cAX-QbWBb&_nc_ht=scontent-atl3-1.xx&oh=00_AfAb0vJVil2cTvHz01AVOXfBWhDMNFhz-qnp5FRmOqFgiQ&oe=6572C303" width="200" height="500">
+</body>
+</html>

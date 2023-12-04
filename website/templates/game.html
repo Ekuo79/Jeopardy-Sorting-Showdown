@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy Game</title>
+    <style>
+        body {
+            background-image: url('../static/mini-animation.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+        }
+
+        #jeopardy-container {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 100vh;
+        }
+
+        #title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        #answer-container {
+            display: flex;
+            width: 100%;
+            margin-bottom: 150px; /* Adjust the margin as needed */
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        #answer-input {
+            width: 100%; /* Adjust the width as needed */
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #submit-button {
+            width: 80%; /* Adjust the width as needed */
+            background-color: #f39c12;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #point-total {
+            
+            float: right;
+            font-size: 32px;
+            margin: 10px;
+        }
+
+        #action-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background-color: #f39c12;
+            color: #ffffff;
+            font-size: 24px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 20px;
+        }
+
+        #category {
+            font-size: 34px;
+            margin-bottom: 40px;
+        }
+
+        #question {
+            font-size: 30px;
+            margin-bottom: 100px;
+        }
+
+        #point-value {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        #answer{
+            font-size: 30px;
+        }
+        #time {
+            margin-top: 30px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="point-total">Total Points: {{ points_total }}</div>
+    <form id="backToMenuForm" action="/" method="get">
+        <button type="submit" name="exit" value="true">Exit</button>
+    </form>
+    <div id="jeopardy-container">
+        <div id="title">Jeopardy Sorting Showdown !!!</div>
+        
+        <div id="category">Category is: {{ category }}</div>
+        <div id="question">Question: {{ question }}</div>
+        <div id="point-value">Point Value: {{ point_value }}</div>
+        
+        {% if answered == True %}
+            <div id="answer">
+                {% if correct == True %}
+                    <p style="color: lawngreen;">Correct!<br>Answer: {{ answer }}
+                {% else %}
+                    <p style="color: red;">Wrong!<br>Answer: {{ answer }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        <!-- Wrapping answer-input and submit-button in a container -->
+        <form method="POST" id="answer-form">
+            <div id="answer-container">
+                <input type="text" id="answer-input" name="answer-input" placeholder="Your answer..."/>
+                <button type="submit" id="submit-button" name="submit">Submit</button>
+            </div>
+        </form>
+
+        <form id="buttonForm" action="/game" method="post">
+            <button type="submit" name="difficulty" value="hard">Give me a harder question!</button>
+            <button type="submit" name="difficulty" value="easy">Give me an easier question!</button>
+        </form>
+        {% if time %}
+        <div id="time"> Time it took to sort questions: {{ elapsed }}s</div>
+        {% endif %}
+    </div>
+    <audio src="../static/jeopardy-themelq.mp3" autoplay loop>
+        <p>If you are reading this, it is because your browser does not support the audio element.</p>
+    </audio>
+</body>
+</html>
